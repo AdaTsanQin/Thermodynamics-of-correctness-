@@ -39,12 +39,15 @@ A floating-point addition $Z = X + Y$ is modeled as a two-step process:
 
 1.  **Exact Operation (Convolution)**:
     The sum of two independent random variables corresponds to the convolution of their PDFs:
-    $$p_{exact} = p_X * p_Y$$
+    $$\mathrm{Supp}(p_X * p_Y) = \mathrm{Supp}(p_X) + \mathrm{Supp}(p_Y)$$
     If $X$ and $Y$ are uniform (rectangular distributions), $p_{exact}$ becomes a trapezoidal or triangular distribution.
 
 2.  **Coarse Graining (Storage)**:
     To fit the result back into the `FloatEnsemble` model, we force the distribution back to Uniform over the new support interval:
-    $$p_{float} = U_{[\mu_{new}-\delta_{new}, \mu_{new}+\delta_{new}]}$$
+
+    $$
+    p_{\mathrm{float}} = U_{[\mu_{\mathrm{new}}-\delta_{\mathrm{new}}, \mu_{\mathrm{new}}+\delta_{\mathrm{new}}]}
+    $$
 
 ### 3.2 Key Axioms & Inequalities
 The formal verification relies on establishing:
