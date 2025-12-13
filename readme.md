@@ -43,22 +43,24 @@ A floating-point addition $Z = X + Y$ is modeled as a two-step process:
     If $X$ and $Y$ are uniform (rectangular distributions), $p_{exact}$ becomes a trapezoidal or triangular distribution.
 
 2.  **Coarse Graining (Storage)**:
-    To fit the result back into the `FloatEnsemble` model, we force the distribution back to Uniform over the new support interval:
+   To fit the result back into the `FloatEnsemble` model, we force the distribution back to Uniform over the new support interval:
 
-    $$
-    p_{\mathrm{float}} = U_{[\mu_{\mathrm{new}}-\delta_{\mathrm{new}}, \mu_{\mathrm{new}}+\delta_{\mathrm{new}}]}
-    $$
+    $$p_{float} = U_{[\mu_{new}-\delta_{new}, \mu_{new}+\delta_{new}]}$$
+
+    
 
 ### 3.2 Key Axioms & Inequalities
 The formal verification relies on establishing:
 
 1.  **Support Conservation**: The physical interval of the convolution is algebraically identical to the interval calculated by floating-point arithmetic.
+   
     $$\text{Supp}(p_X * p_Y) = \text{Supp}(p_X) + \text{Supp}(p_Y)$$
     
-2.  **Entropy Gap**: For two uniform distributions, their convolution has strictly lower differential entropy than a uniform distribution covering the same total width.
+3.  **Entropy Gap**: For two uniform distributions, their convolution has strictly lower differential entropy than a uniform distribution covering the same total width.
+
     $$H(U_1 * U_2) < H(U_{sum})$$
 
-**Conclusion**: $H(\text{float\_add}) > H(\text{exact\_add})$.
+**Conclusion**: $H(\mathrm{float\_add}) > H(\mathrm{exact\_add})$.
 
 ## 4. Code Structure
 
